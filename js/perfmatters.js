@@ -1,5 +1,3 @@
-// Measuring the Critical Rendering Path with Navigation Timing
-// https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp
 
 function logCRP() {
   var t = window.performance.timing,
@@ -17,5 +15,5 @@ window.addEventListener("load", function(event) {
       w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
 
       // TODO: replace with your Google Analytics profile ID.
-      ga('create', 'UA-XXXX-Y');
+      ga('create', 'UA-58406702-1');
       ga('send', 'pageview');
