@@ -203,15 +203,15 @@ var Main = function() {
       case "scientific":
         var scientific = ["scientific", "technical", "digital", "programming", "calculating", "formulating", "cyberpunk", "mechanical", "technological", 
         "innovative", "brainy", "chemical", "quantum", "astro", "space", "theoretical", "atomic", "electronic", "gaseous", "investigative", "solar", 
-        "extinct", "galactic"]
+        "extinct", "galactic"];
         return scientific;
       default:
         var scientific = ["scientific", "technical", "digital", "programming", "calculating", "formulating", "cyberpunk", "mechanical", "technological", 
         "innovative", "brainy", "chemical", "quantum", "astro", "space", "theoretical", "atomic", "electronic", "gaseous", "investigative", "solar", 
-        "extinct", "galactic"]
+        "extinct", "galactic"];
         return scientific;
-    };
-  };
+    }
+  }
 
   // Pulls noun out of array using random number sent from generator
   function getNoun(y) {
@@ -280,8 +280,8 @@ var Main = function() {
         "quasar", "blackHole", "warpDrive", "laser", "orbit", "gears", "molecule", "electron", "neutrino", "proton", "experiment", "photon", "apparatus",
         "universe", "gravity", "darkMatter", "constellation", "circuit", "asteroid"];
         return scifi;
-    }; 
-  };
+    } 
+  }
 
   var adjectives = ["dark", "color", "whimsical", "shiny", "noise", "apocalyptic", "insulting", "praise", "scientific"];  // types of adjectives for pizza titles
   var nouns = ["animals", "everyday", "fantasy", "gross", "horror", "jewelry", "places", "scifi"];                        // types of nouns for pizza titles
@@ -294,14 +294,14 @@ var Main = function() {
     var randomNoun = parseInt(Math.random() * nouns.length);
     var name = "The " + adjectives[randomAdjective].capitalize() + " " + nouns[randomNoun].capitalize();
     return name;
-  };
+  }
 
   // Chooses random adjective and random noun
   function randomName() {
     var randomNumberAdj = parseInt(Math.random() * adjectives.length);
     var randomNumberNoun = parseInt(Math.random() * nouns.length);
     return generator(adjectives[randomNumberAdj], nouns[randomNumberNoun]);
-  };
+  }
 
   // These functions return a string of a random ingredient from each respective category of ingredients.
   var selectRandomMeat = function() {
@@ -410,13 +410,13 @@ var Main = function() {
       switch(size) {
         case "1":
           document.querySelector("#pizzaSize").innerHTML = "Small";
-          return;
+          break;
         case "2":
           document.querySelector("#pizzaSize").innerHTML = "Medium";
-          return;
+          break;
         case "3":
           document.querySelector("#pizzaSize").innerHTML = "Large";
-          return;
+          break;
         default:
           console.log("bug in changeSliderLabel");
       }
@@ -545,10 +545,8 @@ var Main = function() {
     updatePositions();
   });
 
-  window.requestAnimationFrame(update);
-  function update() {
-    window.addEventListener('scroll', updatePositions);
-    Main.prototype.resizePizzas();
-  }
+
+  window.addEventListener('scroll', updatePositions);
+  Main.prototype.resizePizzas();
 }
 requestAnimationFrame(Main);

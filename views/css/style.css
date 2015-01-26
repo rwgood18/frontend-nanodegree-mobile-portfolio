@@ -11,7 +11,7 @@ body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   background: black;
 }
-
+getElementById("pizza" + i)
 input {
   background: grey;
   font-size: 18px;
