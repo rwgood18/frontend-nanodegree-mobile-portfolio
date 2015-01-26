@@ -400,6 +400,8 @@ var pizzaElementGenerator = function(i) {
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) { 
+  changePizzaSizes(size);
+  changeSliderLabel(size);
   window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
@@ -419,7 +421,7 @@ var resizePizzas = function(size) {
     }
   }
 
-  changeSliderLabel(size);
+ 
 
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
@@ -462,15 +464,14 @@ var resizePizzas = function(size) {
     }
   }
 
-  changePizzaSizes(size);
-  //console.log("changePizzaSizesjustgotcalled");
+
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
   console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms");
 }
-window.requestAnimationFrame(resizePizzas);
+
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
@@ -524,8 +525,12 @@ function updatePositions() {
   }
 }
 
+function move() {
+  window.requestAnimationFrame(updatePositions);
+}
+
 // runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+window.addEventListener('scroll', move);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
@@ -539,7 +544,12 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
+
+window.requestAnimationFrame(update);
+function update() {
+  resizePizzas();
+}
