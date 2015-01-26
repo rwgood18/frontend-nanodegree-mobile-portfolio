@@ -18,7 +18,6 @@ cameron *at* udacity *dot* com
 
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
-//var Main = function() {
 var pizzaIngredients = {};
 pizzaIngredients.meats = [
 "Pepperoni",
@@ -376,7 +375,7 @@ pizzaDescriptionContainer = document.createElement("div");
 pizzaContainer.classList.add("randomPizzaContainer");
 pizzaContainer.style.width = "33.33%";
 pizzaContainer.style.height = "325px";
-pizzaContainer.id = "pizza";                // gives each pizza element a unique id
+pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
 pizzaImageContainer.classList.add("col-md-6");
 
 pizzaImage.src = "images/pizza.png";
@@ -401,27 +400,24 @@ return pizzaContainer;
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 resizePizzas = function(size) { 
-
-
     window.performance.mark("mark_start_resize");   // User Timing API function
 
     // Changes the value for the size of the pizza above the slider
     function changeSliderLabel(size) {
-      switch(size) {
-        case "1":
-          document.querySelector("#pizzaSize").innerHTML = "Small";
-          break;
-        case "2":
-          document.querySelector("#pizzaSize").innerHTML = "Medium";
-          break;
-        case "3":
-          document.querySelector("#pizzaSize").innerHTML = "Large";
-          break;
-        default:
-          console.log("bug in changeSliderLabel");
-      }
+        switch(size) {
+          case "1":
+            document.querySelector("#pizzaSize").innerHTML = "Small";
+            return;
+          case "2":
+            document.querySelector("#pizzaSize").innerHTML = "Medium";
+            return;
+          case "3":
+            document.querySelector("#pizzaSize").innerHTML = "Large";
+            return;
+          default:
+            console.log("bug in changeSliderLabel");
+        }
     }
-
     changeSliderLabel(size);
 
     // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
@@ -443,29 +439,27 @@ resizePizzas = function(size) {
             console.log("bug in sizeSwitcher");
         }
       }
-
       var newsize = sizeSwitcher(size);
       var dx = (newsize - oldsize) * windowwidth;
-
       return dx;
     }
 
     // Iterates through pizza elements on the page and changes their widths
     function changePizzaSizes(size) {
-      var pie = document.getElementById("pizza" );
-      var dx = determineDx(pie, size);
-      var newwidth = pie.offsetWidth + dx + 'px';
-      pie.style.width = newwidth;
+        for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
+            var dx = determineDx(document.getElementById("pizza" + i), size);
+            var newWidth = (document.getElementById("pizza" + i).offsetWidth + dx) + 'px';
+            document.getElementById("pizza" + i).style.width = newWidth;
+        }
     }
-
     changePizzaSizes(size);
+    
     // User Timing API is awesome
     window.performance.mark("mark_end_resize");
     window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
     var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
     console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms");
 }
-
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
@@ -544,11 +538,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     updatePositions();
 });
-
-
-
-//resizePizzas();
-
-
-//}
-//requestAnimationFrame(Main);
