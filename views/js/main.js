@@ -396,7 +396,7 @@ pizzaDescriptionContainer.appendChild(ul);
 pizzaContainer.appendChild(pizzaDescriptionContainer);
 
 return pizzaContainer;
-}
+};
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 resizePizzas = function(size) { 
@@ -407,7 +407,7 @@ resizePizzas = function(size) {
         switch(size) {
           case "1":
             document.querySelector("#pizzaSize").innerHTML = "Small";
-            return .75;
+            return 0.75;
           case "2":
             document.querySelector("#pizzaSize").innerHTML = "Medium";
             return 1;
